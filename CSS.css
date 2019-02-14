@@ -1,0 +1,25 @@
+body {
+  background-color: powderblue;
+}
+h1 {
+  color: blue;
+  text-align:center;
+  font-family:Arial;
+}
+p {
+  color: black;
+  text-align:justify;
+  font-family:Verdana;
+}
+
+img{
+  width: 15%;
+  height: 25%;
+  float:left;
+  margin-left:5%;
+}
+
+div{
+  margin-left:23%;
+  margin-right:10%;
+}
