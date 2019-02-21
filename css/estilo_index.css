@@ -6,13 +6,6 @@ h1, h3 {
   text-align:center;
   font-family:Arial;
 }
-
-#inicio{
- color: red;
- text-align:left;
- margin-left:5%;
-  
-}
   
 p, li{
   color: black;
@@ -20,20 +13,31 @@ p, li{
   font-family:Verdana;
 }
 
-img{
-  width: 15%;
-  height: 25%;
+#sidebar{
+  width: 25%;
   float:left;
   margin-left:5%;
 }
-
-#links{
-  float:left;
-  margin-left:5%;
-  color:red;
+#sidebar img{
+  width:95%;
 }
 
-div{
-  margin-left:23%;
+#sidebar ul li{
+  text-align:center;
+  list-style:none;
+}
+
+#sidebar h3 a{
+  text-decoration:none;
+}
+
+#conteudo{
+  width:55%;
+  float:right;
+  margin-left:5%;
   margin-right:10%;
 }
+
+
+
+
