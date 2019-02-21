@@ -1,7 +1,7 @@
 body {
   background-color: powderblue;
 }
-h1 {
+h1, h3 {
   color: blue;
   text-align:center;
   font-family:Arial;
@@ -14,7 +14,7 @@ h1 {
   
 }
   
-p {
+p, li{
   color: black;
   text-align:justify;
   font-family:Verdana;
@@ -25,6 +25,12 @@ img{
   height: 25%;
   float:left;
   margin-left:5%;
+}
+
+#links{
+  float:left;
+  margin-left:5%;
+  color:red;
 }
 
 div{
