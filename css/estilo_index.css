@@ -16,6 +16,13 @@ body {
   color:#ffffff;
 }
 
+#titulo a img{
+  margin-left: 1%;
+  margin-top: 0.5%;
+  float: left;
+  width: 2%;
+}
+
 h1, h3 {
   color: blue;
   text-align:center;
