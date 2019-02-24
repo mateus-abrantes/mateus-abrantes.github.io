@@ -66,6 +66,21 @@ p, li{
   font-size: 20px;
   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
 }
+.conteudo ul li{
+  text-align:center;
+  list-style:none;
+}
+
+.conteudo ul li a{
+    text-decoration:none;
+    color: #504949;
+}
+
+.text_destaque{
+  font-weight: bold;
+  color: #2d2f2a
+}
+
 table{
   margin: 2% auto;
 }
