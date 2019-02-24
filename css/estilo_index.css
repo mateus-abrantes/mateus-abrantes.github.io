@@ -72,8 +72,8 @@ p, li{
 }
 
 .conteudo ul li a{
-    text-decoration:none;
-    color: #504949;
+  text-decoration:none;
+  color: #504949;
 }
 
 .text_destaque{
@@ -84,17 +84,29 @@ p, li{
 table{
   margin: 2% auto;
 }
- .titulo_prof{
-   margin-left: 20%;
-   padding: 1%;
-   background-color: rgb(27, 23, 26);
-   border-radius: 25px;
-   color:#ffffff;
-   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
- }
+.titulo_prof{
+  margin-left: 20%;
+  padding: 1%;
+  background-color: rgb(27, 23, 26);
+  border-radius: 25px;
+  color:#ffffff;
+  box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
+}
 
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
+}
+
+.conteudo form div{
+  width: 30%;
+  margin: 2% auto;
+  font-weight: bold;
+}
+
+.conteudo form div textarea{
+  width: 100%;
+  height: 75px;
+
 }
