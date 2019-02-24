@@ -52,15 +52,16 @@ p, li{
   color: #504949;
 }
 
-#conteudo{
+#conteudo_inicial{
   width:55%;
   float:right;
   margin-right:8%;
+}
+
+.conteudo{
   background-color: rgb(139, 178, 193);
   padding: 2%;
   border-radius: 15px 50px;
   font-size: 20px;
   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
-
-
 }
