@@ -8,6 +8,7 @@ body {
   height: 5%;
   background-color: rgb(27, 23, 26);
   border-radius: 25px;
+  box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
 }
 
 #titulo h1{
@@ -63,5 +64,22 @@ p, li{
   padding: 2%;
   border-radius: 15px 50px;
   font-size: 20px;
+  box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
+}
+table{
+  margin: 2% auto;
+}
+ .titulo_prof{
+   margin-left: 20%;
+   padding: 1%;
+   background-color: rgb(27, 23, 26);
+   border-radius: 25px;
+   color:#ffffff;
+   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
+ }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
 }
