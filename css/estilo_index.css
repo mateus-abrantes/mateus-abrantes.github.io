@@ -84,6 +84,11 @@ p, li{
   color: #504949;
 }
 
+.lista ul li{
+  text-align:left;
+  list-style:circle;
+}
+
 .text_destaque{
   font-weight: bold;
   color: #2d2f2a
