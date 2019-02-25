@@ -72,6 +72,7 @@ p, li{
   border-radius: 15px 50px;
   font-size: 20px;
   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
+  margin-bottom: 1%;
 }
 
 .conteudo ul li{
