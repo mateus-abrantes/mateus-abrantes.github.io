@@ -5,21 +5,22 @@ body {
 #titulo{
   margin: 0 auto 1% auto;
   width:100%;
-  height: 5%;
+  height: 55px;
   background-color: rgb(27, 23, 26);
   border-radius: 25px;
   box-shadow: -15px 8px 56px -4px rgba(0,0,0,0.75);
 }
 
 #titulo h1{
-  padding-top: 1%;
   color:#ffffff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 #titulo a img{
-  margin-left: 1%;
   float: left;
   width: 30px;
+  height: 55px;
 }
 
 h1, h3 {
