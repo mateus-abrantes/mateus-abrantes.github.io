@@ -78,6 +78,7 @@ p, li{
 .conteudo ul li{
   text-align:center;
   list-style:none;
+  padding-bottom: 15px;
 }
 
 .conteudo ul li a{
