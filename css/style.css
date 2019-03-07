@@ -1,0 +1,44 @@
+body{
+  margin: 0 auto;
+}
+
+.cabecalho{
+  height: 25%;
+  background-color: blue;
+}
+
+a .sidebar_left{
+  display: inline-block;
+  width: 25%;
+  background-color: yellow;
+  padding: 0;
+  margin: 0;
+}
+
+a .sidebar_right{
+  display: inline-block;
+  width: 25%;
+  background-color: green;
+  padding: 0;
+  margin: 0;
+}
+
+a .sidebar_center{
+  display: inline-block;
+  width: 49%;
+  background-color: magenta;
+  padding: 0;
+  margin: 0;
+}
+
+
+.img_logos{
+  width: 150px;
+  margin: 0 25%;
+}
+
+.footer{
+  margin-top: 0;
+  height: 25%;
+  background-color: #57c919;
+}
