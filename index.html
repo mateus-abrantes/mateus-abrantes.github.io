@@ -3,36 +3,43 @@
 <head>
   <meta charset="utf-8">
   <title>Página Principal</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-  <div class="cabecalho">
-    <h1>Minha página principal</h1>
-  </div>
-  <a href="pagina_sem_css/index.html">
-    <div class="sidebar_left">
-      <center>
-        <img src="imagens/sem_css.png" alt="site sem css" class="img_logos">
-      </center>
-      <h2>Página sem CSS</h2>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar-collapse justify-content-md-center collapse show" id="navbarsExample08" style="">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html"><h2>Minha página principal <span class="sr-only">(current)</span></h2></a>
+        </li>
+      </ul>
     </div>
-  </a>
-  <a href="Bootstrap/index.html">
-    <div class="sidebar_center">
-      <center>
-      <img src="imagens/Bootstrap-Logo-PNG.png" alt="site com Bootstrap" class="img_logos">
-</center>
-      <h2>Página com Bootstrap</h2>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 shadow-sm">
+        <img src="imagens/sem_css.png" class="card-img-top" alt="site sem css">
+        <div class="card-body">
+          <h5 class="card-title">Página sem CSS</h5>
+          <a href="pagina_sem_css/index.html" class="btn btn-primary">Sem CSS</a>
+        </div>
+      </div>
+      <div class="card mb-4 shadow-sm">
+        <img src="imagens/Bootstrap-Logo-PNG.png" class="card-img-top" alt="site com Bootstrap">
+        <div class="card-body">
+          <h5 class="card-title">Página com Bootstrap</h5>
+          <a href="Bootstrap/index.html" class="btn btn-primary">Bootstrap</a>
+        </div>
+      </div>
+      <div class="card mb-4 shadow-sm">
+        <img src="imagens/com_css.png" class="card-img-top" alt="site com css">
+        <div class="card-body">
+          <h5 class="card-title">Página com CSS</h5>
+          <a href="pagina_com_css/index.html" class="btn btn-primary">Com CSS</a>
+        </div>
+      </div>
     </div>
-  </a>
-  <a href="pagina_com_css/index.html">
-    <div class="sidebar_right">
-      <img src="imagens/com_css.png" alt="site com css" class="img_logos">
-      <h2>Página com CSS</h2>
-    </div>
-  </a>
-  <div class="footer">
-    <p>&copy; 2019 Mateus Abrantes</p>
   </div>
 </body>
 </html>
