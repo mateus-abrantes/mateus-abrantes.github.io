@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Minha Página - Disciplinas - DCA0445 - Processamento Digital de Imagens</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="../../assets/vendor/owl.carousel/../../assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/highlight/styles/atom-one-dark-reasonable.css">
+    <script src="../../assets/highlight/highlight.pack.js"></script>
+
+    <!-- =======================================================
+  * Template Name: iPortfolio - v1.4.1
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+    <!-- ======= Mobile nav toggle button ======= -->
+    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+    <!-- ======= Header ======= -->
+    <header id="header">
+        <div class="d-flex flex-column">
+
+            <div class="profile">
+                <img src="../../assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
+                <h1 class="text-light"><a href="index.html">Francisco Mateus de Oliveira Abrantes</a></h1>
+                <!-- <div class="social-links mt-3 text-center">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div> -->
+            </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="../../index.html"><i class="bx bx-home"></i> <span>Home</span></a></li>
+                    <!-- <li><a href="#about"><i class="bx bx-user"></i> <span>About</span></a></li> -->
+                    <!-- <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li> -->
+                    <li class="active"><a href="../../disciplinas.html"><i class="bx bx-book-content"></i>
+                            Disciplinas</a></li>
+                    <!-- <li><a href="#services"><i class="bx bx-server"></i> Services</a></li> -->
+                    <!-- <li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li> -->
+
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+            <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>DCA0445 - Processamento Digital de Imagens</h2>
+                    <ol>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li>Disciplinas</li>
+                        <li>DCA0445 - Processamento Digital de Imagens</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Breadcrumbs -->
+
+        <section class="inner-page">
+            <div class="container">
+                <section>
+                    <div class="section-title">
+                        <h2>2. Manipulando pixels em uma imagem</h2>
+                        <h3>2.1 Dado dois pontos traçar um retângulo na imagem e dentro da área desse retângulo a imagem deve ser negativa.</h2>
+                            <pre>
+                                <code class="cpp hljs">
+    #include &lt;iostream&gt;
+    #include &lt;opencv2/opencv.hpp&gt;
+
+    using namespace cv;
+    using namespace std;
+
+    // Estrutura para ponto
+    struct ponto
+    {
+    int x;
+    int y;
+    };
+
+    void limites(int &variavel,int limite){
+    while(variavel&gt;limite){
+        std::cout&lt;&lt;"Valor invalido digite novamente:";
+        std::cin &gt;&gt; variavel;
+    }
+    }
+
+    int main(int, char **)
+    {
+    cv::Mat image;
+    cv::Vec3b val;
+    // Definindo as variaveis para os pontos de escolha
+    struct ponto P1;
+    struct ponto P2;
+    int x1, x2, y1, y2;
+
+    image = cv::imread("biel.png", cv::IMREAD_GRAYSCALE);
+    if (!image.data)
+        std::cout &lt;&lt; "nao abriu biel.png" &lt;&lt; std::endl;
+
+    cv::namedWindow("janela", cv::WINDOW_AUTOSIZE);
+    std::cout &lt;&lt; "Digite o valor da coordenada x do primeiro ponto entre 0 e " &lt;&lt; image.rows &lt;&lt; ":";
+    std::cin &gt;&gt; P1.x;
+    limites(P1.x, image.rows);
+    std::cout &lt;&lt; "Digite o valor da coordenada y do primeiro ponto entre 0 e " &lt;&lt; image.cols &lt;&lt; ":";
+    std::cin &gt;&gt; P1.y;
+    limites(P1.y, image.cols);
+    std::cout &lt;&lt; "Digite o valor da coordenada x do segundo ponto entre 0 e " &lt;&lt; image.rows &lt;&lt; ":";
+    std::cin &gt;&gt; P2.x;
+    limites(P2.x, image.rows);
+    std::cout &lt;&lt; "Digite o valor da coordenada y do segundo ponto entre 0 e " &lt;&lt; image.cols &lt;&lt; ":";
+    std::cin &gt;&gt; P2.y;
+    limites(P2.y, image.cols);
+    std::cout&lt;&lt; "As coordenadas dos pontos sao: P1("&lt;&lt;P1.x&lt;&lt;","&lt;&lt;P1.y&lt;&lt;") , P1("&lt;&lt;P1.x&lt;&lt;","&lt;&lt;P1.y&lt;&lt;").";
+
+    // Pegando as coordenadas x e y maiores e menores
+    // Coordenada x
+    if (P1.x &gt; P2.x)
+    {
+        x1 = P2.x;
+        x2 = P1.x;
+    }
+    else
+    {
+        x1 = P1.x;
+        x2 = P2.x;
+    }
+    // Coordenada y
+    if (P1.y &gt; P2.y)
+    {
+        y1 = P2.y;
+        y2 = P1.y;
+    }
+    else
+    {
+        y1 = P1.y;
+        y2 = P2.y;
+    }
+
+    for (int i = x1; i &lt; x2; i++)
+    {
+        for (int j = y1; j &lt; y2; j++)
+        {
+        image.at&lt;uchar&gt;(i, j) = 255 -image.at&lt;uchar&gt;(i, j);
+        }
+    }
+
+    cv::imshow("janela", image);
+    cv::waitKey();
+    return 0;
+    }
+
+                                </code>
+                            </pre>
+                            <h3>Resultado</h3>
+                            <figure><img src="../../codigos/PDI/Exercicios/2.2/q1/imagem_resultado.png"></figure>
+                            <h3>2.2 Trocar os quadrantes de uma imagem</h2>
+                                <pre>
+                                    <code class="cpp hljs">
+#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int, char **)
+{
+    cv::Mat image, image_quadrantes;
+    cv::Mat quadrante1, quadrante2, quadrante3, quadrante4;
+    // Dimencoes da imagem
+    int width, height;
+
+    image = cv::imread("biel.png", cv::IMREAD_GRAYSCALE);
+    if (!image.data)
+    {
+        std::cout &lt;&lt; "nao abriu biel.png" &lt;&lt; std::endl;
+    }
+    // Copiando a imagem original para uma nova matriz que sera manipulada
+    image_quadrantes = image.clone();
+    width = image.cols;
+    height = image.rows;
+    cv::namedWindow("janela", cv::WINDOW_AUTOSIZE);
+    // Fatiando os quadrantes das imagens
+    quadrante1 = image(cv::Rect(0, 0, (width / 2), (height / 2)));
+    quadrante2 = image(cv::Rect((width / 2), 0, (width / 2), (height / 2)));
+    quadrante3 = image(cv::Rect(0, (height / 2), (width / 2), (height / 2)));
+    quadrante4 = image(cv::Rect((width / 2), (height / 2), (width / 2), (height / 2)));
+
+    // copiando para imagem auxiliar
+    quadrante1.copyTo(image_quadrantes(cv::Rect((width / 2), (height / 2), (width / 2), (height / 2))));
+    quadrante2.copyTo(image_quadrantes(cv::Rect(0, (height / 2), (width / 2), (height / 2))));
+    quadrante3.copyTo(image_quadrantes(cv::Rect((width / 2), 0, (width / 2), (height / 2))));
+    quadrante4.copyTo(image_quadrantes(cv::Rect(0, 0, (width / 2), (height / 2))));
+
+    cv::imwrite("imagem_resultado.png", image_quadrantes);
+    cv::imshow("janela", image_quadrantes);
+    cv::waitKey();
+    return 0;
+}
+                                    </code>
+                                </pre>
+                                <h3>Resultado</h3>
+                                <figure><img src="../../codigos/PDI/Exercicios/2.2/q2/imagem_resultado.png"></figure>
+                    </div>
+                </section>
+                <section>
+                    <div class="section-title">
+                        <h2>3. Preenchendo regiões</h2>
+                        <pre>
+                            <code class="cpp hljs">
+#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char **argv)
+{
+    cv::Mat image;
+    int width, height;
+    int nobjects, nburacos;
+    cv::Point p;
+    image = cv::imread("bolhas.png", cv::IMREAD_GRAYSCALE);
+
+    if (!image.data)
+    {
+        std::cout &lt;&lt; "imagem nao carregou corretamente\n";
+        return (-1);
+    }
+    width = image.cols;
+    height = image.rows;
+    std::cout &lt;&lt; width &lt;&lt; "x" &lt;&lt; height &lt;&lt; std::endl;
+
+    p.x = 0;
+    p.y = 0;
+
+    // Removendo os objetos percentes as bordas
+    // Bordas das laterais esquerdas e direitas
+    for (int i = 0; i &lt; height; i++)
+    {
+        if (image.at&lt;uchar&gt;(i, 0) == 255)
+        {
+            p.x = 0;
+            p.y = i;
+            // preenche o objeto com 0
+            cv::floodFill(image, p, 0);
+        }
+
+        if (image.at&lt;uchar&gt;(i, width - 1) == 255)
+        {
+            p.x = width - 1;
+            p.y = i;
+            // preenche o objeto com 0
+            cv::floodFill(image, p, 0);
+        }
+    }
+    cv::imwrite("image_bordas_verticais.png", image);
+    // Bordas das partes superior e inferior
+    for (int i = 1; i &lt; width - 1; i++)
+    {
+        if (image.at&lt;uchar&gt;(0, i) == 255)
+        {
+            p.x = i;
+            p.y = 0;
+            cv::floodFill(image, p, 0);
+        }
+
+        if (image.at&lt;uchar&gt;(height - 1, i) == 255)
+        {
+            p.x = i;
+            p.y = height - 1;
+            cv::floodFill(image, p, 0);
+        }
+    }
+    cv::imwrite("image_bordas_horizontais.png", image);
+
+    p.x = 0;
+    p.y = 0;
+    cv::floodFill(image, p, 120);
+
+    // busca objetos presentes
+    nobjects = 0;
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            if (image.at&lt;uchar&gt;(i, j) == 255)
+            {
+                // achou um objeto
+                nobjects++;
+                p.x = j;
+                p.y = i;
+                cv::floodFill(image, p, 50);
+            }
+        }
+    }
+    cv::imwrite("image_num_objetos.png", image);
+
+    // numero de buracos
+    nburacos = 0;
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            if (image.at&lt;uchar&gt;(i, j) == 0)
+            {
+                // achou um objeto
+                nburacos++;
+                p.x = j;
+                p.y = i;
+                cv::floodFill(image, p, 200);
+            }
+        }
+    }
+    std::cout &lt;&lt; "Foram encontrados " &lt;&lt; nobjects &lt;&lt; " objetos" &lt;&lt; endl;
+    std::cout &lt;&lt; "Foram encontrados " &lt;&lt; nburacos &lt;&lt; " objetos contendo buracos" &lt;&lt; endl;
+    cv::imshow("image", image);
+    cv::imwrite("labeling.png", image);
+    cv::waitKey();
+    return 0;
+}
+                            </code>
+                        </pre>
+                        <h3>Resultados</h3>
+                        <ol>
+                            <li>Remoção das bolhas nas extremidades das laterais esquerda e direita.</li>
+                            <figure><img src="../../codigos/PDI/Exercicios/3.2/image_bordas_verticais.png"></figure>
+                            <li>Remoção das bolhas nas extremidades superiores e inferiores.</li>
+                            <figure><img src="../../codigos/PDI/Exercicios/3.2/image_bordas_horizontais.png"></figure>
+                            <li>Identificação do total de objetos.</li>
+                            <figure><img src="../../codigos/PDI/Exercicios/3.2/image_num_objetos.png"></figure>
+                            <li>Identificação do total de bolhas com furos.</li>
+                            <figure><img src="../../codigos/PDI/Exercicios/3.2/labeling.png"></figure>
+                        </ol>
+                    </div>
+                </section>
+                <section>
+                    <div class="section-title">
+                        <h2>4. Manipulação de histogramas</h2>
+                        <h3>4.1 Equalização</h2>
+                            <pre>
+                            <code class="cpp hljs">
+#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char **argv)
+{
+
+    cv::Mat image, imagem_equalizada, hist, hist_equalizado;
+    cv::VideoCapture cap;
+    int width, height;
+    int nbins = 64;
+    float range[] = {0, 255};
+    const float *histrange = {range};
+    bool uniform = true;
+    bool acummulate = false;
+    int key;
+
+    cap.open(0);
+
+    if (!cap.isOpened())
+    {
+        std::cout &lt;&lt; "cameras indisponiveis";
+        return -1;
+    }
+
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+    height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
+
+    std::cout &lt;&lt; "largura = " &lt;&lt; width &lt;&lt; std::endl;
+    std::cout &lt;&lt; "altura  = " &lt;&lt; height &lt;&lt; std::endl;
+
+    int histw = nbins, histh = nbins / 2;
+    // Matriz do histogrma imagem original
+    cv::Mat histImg(histh, histw, CV_8UC1, Scalar(0, 0, 0));
+    // Matriz do histogrma imagem equalizada
+    cv::Mat histImg_equalizada(histh, histw, CV_8UC1, Scalar(0, 0, 0));
+
+    while (true)
+    {
+
+        cap &gt;&gt; image;
+        // imagem cinza
+        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
+        // equalizando a imagem e colocando na matriz da imagem_equalizada
+        cv::equalizeHist(image, imagem_equalizada);
+        // histograma da imagem original
+        cv::calcHist(&image, 1, 0, Mat(), hist, 1,
+                     &nbins, &histrange,
+                     uniform, acummulate);
+        // histograma da imagem equalizada
+        cv::calcHist(&imagem_equalizada, 1, 0, Mat(), hist_equalizado, 1,
+                     &nbins, &histrange,
+                     uniform, acummulate);
+        // normalizando os histogramas
+        cv::normalize(hist, hist, 0, histImg.rows, cv::NORM_MINMAX, -1, cv::Mat());
+        cv::normalize(hist_equalizado, hist_equalizado, 0, histImg_equalizada.rows, cv::NORM_MINMAX, -1, cv::Mat());
+
+        // zerando as matrizes
+        histImg.setTo(cv::Scalar(0));
+        histImg_equalizada.setTo(cv::Scalar(0));
+
+        for (int i = 0; i &lt; nbins; i++)
+        {
+            // Desenhando os histogramas
+            cv::line(histImg,
+                     cv::Point(i, histh),
+                     cv::Point(i, histh - cvRound(hist.at&lt;float&gt;(i))),
+                     cv::Scalar(255, 255, 255), 1, 8, 0);
+            cv::line(histImg_equalizada,
+                     cv::Point(i, histh),
+                     cv::Point(i, histh - cvRound(hist_equalizado.at&lt;float&gt;(i))),
+                     cv::Scalar(255, 255, 255), 1, 8, 0);
+        }
+        // copiando para a imagem da camera os histogramas
+        histImg.copyTo(image(cv::Rect(0, 0, nbins, histh)));
+        histImg_equalizada.copyTo(imagem_equalizada(cv::Rect(0, 0, nbins, histh)));
+
+        cv::imshow("Imagem Original", image);
+        cv::imshow("Imagem Equalizada", imagem_equalizada);
+        cv::imwrite("imagem_original.png", image);
+        cv::imwrite("imagem_equalizada.png", imagem_equalizada);
+        key = cv::waitKey(30);
+        if (key == 27)
+            break;
+    }
+    return 0;
+}
+                            </code>
+                        </pre>
+                            <h3>Resultados</h3>
+                            <ol>
+                                <li>Imagem original</li>
+                                <figure><img src="../../codigos/PDI/Exercicios/4.2/q1/imagemOriginal.png"></figure>
+                                <li>Imagem equalizada</li>
+                                <figure><img src="../../codigos/PDI/Exercicios/4.2/q1/imagemEqualizada.png"></figure>
+                            </ol>
+                            <h3>4.2 Detector de movimento</h2>
+                                <pre>
+                                <code class="cpp hljs">
+#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char **argv)
+{
+
+    cv::Mat image, hist, hist_anterior;
+    cv::VideoCapture cap;
+    int width, height;
+    int nbins = 64;
+    float range[] = {0, 255};
+    const float *histrange = {range};
+    bool uniform = true;
+    bool acummulate = false;
+    int key, cont = 0;
+    float diferenca;
+
+    cap.open(0);
+
+    if (!cap.isOpened())
+    {
+        std::cout &lt;&lt; "cameras indisponiveis";
+        return -1;
+    }
+
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+    height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
+
+    std::cout &lt;&lt; "largura = " &lt;&lt; width &lt;&lt; std::endl;
+    std::cout &lt;&lt; "altura  = " &lt;&lt; height &lt;&lt; std::endl;
+
+    int histw = nbins, histh = nbins / 2;
+    // Matriz do histogrma imagem
+    cv::Mat histImg(histh, histw, CV_8UC1, Scalar(0, 0, 0));
+    // Matriz do histogrma imagem anterior
+    cv::Mat histImg_anterior(histh, histw, CV_8UC1, Scalar(0, 0, 0));
+    while (true)
+    {
+        cont++;
+        cap &gt;&gt; image;
+        // imagem cinza
+        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
+        // histograma da imagem
+        cv::calcHist(&image, 1, 0, Mat(), hist, 1,
+                     &nbins, &histrange,
+                     uniform, acummulate);
+        diferenca = 1;
+        // normalizando os histogramas
+        cv::normalize(hist, hist, 0, histImg.rows, cv::NORM_MINMAX, -1, cv::Mat());
+        cv::normalize(hist_anterior, hist_anterior, 0, histImg.rows, cv::NORM_MINMAX, -1, cv::Mat());
+
+        // zerando as matrizes
+        histImg.setTo(cv::Scalar(0));
+        for (int i = 0; i &lt; nbins; i++)
+        {
+            // Desenhando os histogramas
+            cv::line(histImg,
+                     cv::Point(i, histh),
+                     cv::Point(i, histh - cvRound(hist.at&lt;float&gt;(i))),
+                     cv::Scalar(255, 255, 255), 1, 8, 0);
+        }
+        // copiando para a imagem da camera os histogramas
+        histImg.copyTo(image(cv::Rect(0, 0, nbins, histh)));
+        if (cont == 1)
+        {
+            // histograma da imagem anterior
+            cv::calcHist(&image, 1, 0, Mat(), hist_anterior, 1,
+                         &nbins, &histrange,
+                         uniform, acummulate);
+        }
+        else if (cont == 10)
+        {
+            cont = 0;
+            diferenca = cv::compareHist(hist, hist_anterior, HISTCMP_CORREL);
+            std::cout &lt;&lt; diferenca &lt;&lt; std::endl;
+        }
+
+        if (diferenca &lt; 0.99)
+        {
+            cv::putText(image, "Movimento detectado!", cv::Point(70, 30),
+                        FONT_HERSHEY_SIMPLEX, .7,
+                        Scalar(0, 0, 0, 0), 2);
+            cv::imwrite("imagem_movimento.png", image);
+        }
+
+        cv::imwrite("imagem_original.png", image);
+        cv::imshow("Imagem", image);
+        key = cv::waitKey(30);
+        if (key == 27)
+            break;
+    }
+    return 0;
+}
+                                </code>
+                            </pre>
+                                <h3>Resultados</h3>
+                                <ol>
+                                    <li>Imagem sem movimento detectdado</li>
+                                    <figure><img src="../../codigos/PDI/Exercicios/4.2/q2/imagem_original.png"></figure>
+                                    <li>Imagem com movimento detectdado</li>
+                                    <figure><img src="../../codigos/PDI/Exercicios/4.2/q2/imagem_movimento.png">
+                                    </figure>
+                                </ol>
+                    </div>
+                </section>
+                <section>
+                    <div class="section-title">
+                        <h2>5. Filtragem no domínio espacial I</h2>
+                        <pre>
+                            <code class="cpp hljs">
+#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+void printmask(cv::Mat &m)
+{
+  for (int i = 0; i &lt; m.size().height; i++)
+  {
+    for (int j = 0; j &lt; m.size().width; j++)
+    {
+      std::cout &lt;&lt; m.at&lt;float&gt;(i, j) &lt;&lt; ",";
+    }
+    std::cout &lt;&lt; "\n";
+  }
+}
+
+int main(int, char **)
+{
+  cv::VideoCapture cap; // open the default camera
+  float media[] = {0.1111, 0.1111, 0.1111, 0.1111, 0.1111,
+                   0.1111, 0.1111, 0.1111, 0.1111};
+  float gauss[] = {0.0625, 0.125, 0.0625, 0.125, 0.25,
+                   0.125, 0.0625, 0.125, 0.0625};
+  float horizontal[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
+  float vertical[] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
+  float laplacian[] = {0, -1, 0, -1, 4, -1, 0, -1, 0};
+  float boost[] = {0, -1, 0, -1, 5.2, -1, 0, -1, 0};
+
+  cv::Mat frame, framegray, frame32f, frameFiltered;
+  cv::Mat mask(3, 3, CV_32F);
+  cv::Mat mask2(3, 3, CV_32F);
+  cv::Mat result;
+  double width, height;
+  bool laplaciano_gaussiano, laplaciano;
+  int absolut;
+  char key;
+
+  cap.open(0);
+
+  if (!cap.isOpened()) // check if we succeeded
+    return -1;
+
+  cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+  cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+  width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+  height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
+  std::cout &lt;&lt; "largura=" &lt;&lt; width &lt;&lt; "\n";
+  ;
+  std::cout &lt;&lt; "altura =" &lt;&lt; height &lt;&lt; "\n";
+  ;
+  std::cout &lt;&lt; "fps    =" &lt;&lt; cap.get(cv::CAP_PROP_FPS) &lt;&lt; "\n";
+  std::cout &lt;&lt; "format =" &lt;&lt; cap.get(cv::CAP_PROP_FORMAT) &lt;&lt; "\n";
+
+  cv::namedWindow("filtroespacial", cv::WINDOW_NORMAL);
+  cv::namedWindow("original", cv::WINDOW_NORMAL);
+
+  mask = cv::Mat(3, 3, CV_32F, media);
+  absolut = 1; // calcs abs of the image
+  laplaciano_gaussiano = false;
+  laplaciano = false;
+  for (;;)
+  {
+    cap &gt;&gt; frame; // get a new frame from camera
+    cv::cvtColor(frame, framegray, cv::COLOR_BGR2GRAY);
+    cv::flip(framegray, framegray, 1);
+    cv::imshow("original", framegray);
+    framegray.convertTo(frame32f, CV_32F);
+    cv::filter2D(frame32f, frameFiltered, frame32f.depth(), mask,
+                 cv::Point(1, 1), 0);
+    if (laplaciano_gaussiano == true)
+    {
+      cv::filter2D(frameFiltered, frameFiltered, frame32f.depth(), mask2,
+                   cv::Point(1, 1), 0);
+    }
+    if (absolut)
+    {
+      frameFiltered = cv::abs(frameFiltered);
+    }
+
+    frameFiltered.convertTo(result, CV_8U);
+
+    cv::imshow("filtroespacial", result);
+
+    if (laplaciano_gaussiano == true)
+    {
+      cv::imwrite("imagem_laplaciano_gaussiano.png", result);
+    }
+
+    if (laplaciano == true)
+    {
+      cv::imwrite("imagem_laplaciano.png", result);
+    }
+
+    key = (char)cv::waitKey(10);
+    if (key == 27)
+      break; // esc pressed!
+    switch (key)
+    {
+    case 'a':
+      absolut = !absolut;
+      break;
+    case 'm':
+      laplaciano_gaussiano = false;
+      laplaciano = false;
+      mask = cv::Mat(3, 3, CV_32F, media);
+      printmask(mask);
+      break;
+    case 'g':
+      laplaciano_gaussiano = false;
+      laplaciano = false;
+      mask = cv::Mat(3, 3, CV_32F, gauss);
+      printmask(mask);
+      break;
+    case 'h':
+      laplaciano_gaussiano = false;
+      laplaciano = false;
+      mask = cv::Mat(3, 3, CV_32F, horizontal);
+      printmask(mask);
+      break;
+    case 'v':
+      laplaciano_gaussiano = false;
+      laplaciano = false;
+      mask = cv::Mat(3, 3, CV_32F, vertical);
+      printmask(mask);
+      break;
+    case 'l':
+      laplaciano_gaussiano = false;
+      laplaciano = true;
+      mask = cv::Mat(3, 3, CV_32F, laplacian);
+      printmask(mask);
+      break;
+    case 'b':
+      laplaciano_gaussiano = false;
+      laplaciano = false;
+      mask = cv::Mat(3, 3, CV_32F, boost);
+      break;
+    case 'c':
+      laplaciano = false;
+      mask = cv::Mat(3, 3, CV_32F, gauss);
+      laplaciano_gaussiano = true;
+      printmask(mask);
+      mask2 = cv::Mat(3, 3, CV_32F, laplacian);
+      printmask(mask2);
+      break;
+    default:
+      break;
+    }
+  }
+  return 0;
+}
+
+                            </code>
+                        </pre>
+                        <h3>Resultados</h3>
+                        <ol>
+                            <li>Imagem com filtro Laplaciano</li>
+                            <figure><img src="../../codigos/PDI/Exercicios/5.2/imagem_laplaciano.png"></figure>
+                            <li>Imagem com filtro Gausseano, e aplicado posteriormente o Laplaciano</li>
+                            <figure><img src="../../codigos/PDI/Exercicios/5.2/imagem_laplaciano_gaussiano.png">
+                            </figure>
+                        </ol>
+                    </div>
+                </section>
+                <section>
+                    <div class="section-title">
+                        <h2>6. Filtragem no domínio espacial II</h2>
+                        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis
+                            commodi quidem hic quas.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>iPortfolio</span></strong>
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End  Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="../../assets/vendor/counterup/counterup.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/venobox/venobox.min.js"></script>
+    <script src="../../assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="../../assets/vendor/typed.js/typed.min.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+</body>
+
+</html>
