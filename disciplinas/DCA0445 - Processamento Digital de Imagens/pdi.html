@@ -97,6 +97,8 @@
                     <div class="section-title">
                         <h2>2. Manipulando pixels em uma imagem</h2>
                         <h3>2.1 Dado dois pontos traçar um retângulo na imagem e dentro da área desse retângulo a imagem deve ser negativa.</h2>
+                            <p><b>RESOLUÇÃO:</b> O usuario entra com as coordenadas x e y dos pontos, esses pontos são verificados a fim de encontrar de se determinar qual é maior, e com isso determinar o ponto inicial e final para o retangulo formado por
+                                esses dois pontos. Tendo em maos as delimitacoes do retângulo, lemos os pontos pertencentes ao retângulo e subtraimos os mesmos por 255 para obter o efeito negativo.</p>
                             <pre>
                                 <code class="cpp hljs">
     #include &lt;iostream&gt;
@@ -192,6 +194,8 @@
                                 <figcaption class="figure-caption">Imagem com resultado final</figcaption>
                             </figure>
                             <h3>2.2 Trocar os quadrantes de uma imagem</h2>
+                                <p><b>RESOLUÇÃO:</b>Criamos 4 matrizes para representar os 4 quadrantes da imagem de entrada. Pegamos a imagem de entrada e copiamos para uma nova matriz de backup para ter o tamanho da imagem original. Depois inicializamos
+                                    os quadrantes usando a seleção de pontos formados por retangulos que tem os limites dos quadrantes, e depois copiamos os quadrantes em ordem inversa para a imagem de backup</p>
                                 <pre>
                                     <code class="cpp hljs">
 #include &lt;iostream&gt;
@@ -246,7 +250,12 @@ int main(int, char **)
                 <section>
                     <div class="section-title">
                         <h2>3. Preenchendo regiões</h2>
-                        <pre>
+                        <h3>3.1 Rotular mais de 255 objetos</h2>
+                            <p><b>RESOLUÇÃO:</b>Uma solução caso fosse o objetivo apenas contar a quantidade e objetos, seria ao identificar o objeto nos apenas removemos ele e incrementamos o contador.</p>
+                            <h3>3.2 Identificar regiões com buracos</h2>
+                                <p><b>RESOLUÇÃO:</b>Primeiro removemos os objetos das estremidades da imagem, depois aplicamos a rotulação. Depois de passar a rotulação nos pegamos o ponto inicial e damos uma rotução para um cinza claro para que possamos
+                                    passar mais uma vez a rotulação verificando regiões com preto, e assim obtemos a quantidade de figuras com buracos já que elas vão ser as unicas que tem cor preta.</p>
+                                <pre>
                             <code class="cpp hljs">
 #include &lt;iostream&gt;
 #include &lt;opencv2/opencv.hpp&gt;
@@ -361,37 +370,37 @@ int main(int argc, char **argv)
 }
                             </code>
                         </pre>
-                        <h3>Resultados</h3>
-                        <ol>
-                            <li>Remoção das bolhas nas extremidades das laterais esquerda e direita.</li>
-                            <figure class="figure">
-                                <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/image_bordas_verticais.png">
-                                <figcaption class="figure-caption">Imagem da remoção das bolhas nas extremidades das laterais esquerda e direita.</figcaption>
-                            </figure>
-                            <li>Remoção das bolhas nas extremidades superiores e inferiores.</li>
-                            <figure class="figure">
-                                <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/image_bordas_horizontais.png">
-                                <figcaption class="figure-caption">Imagem da remoção das bolhas nas extremidades superiores e inferiores.</figcaption>
-                            </figure>
-                            <li>Identificação do total de objetos.</li>
-                            <figure class="figure">
-                                <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/image_num_objetos.png">
-                                <figcaption class="figure-caption">Imagem da identificação do total de objetos.
-                                </figcaption>
-                            </figure>
-                            <li>Identificação do total de bolhas com furos.</li>
-                            <figure class="figure">
-                                <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/labeling.png">
-                                <figcaption class="figure-caption">Imagem da identificação do total de bolhas com furos.
-                                </figcaption>
-                            </figure>
-                        </ol>
+                                <h3>Resultados</h3>
+                                <h5>1 - Remoção das bolhas nas extremidades das laterais esquerda e direita.</h5>
+                                <figure class="figure">
+                                    <img src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/image_bordas_verticais.png" class="figure-img img-fluid rounded" alt="Imagem da remoção das bolhas nas extremidades das laterais esquerda e direita.">
+                                    <figcaption class="figure-caption text-right">Imagem da remoção das bolhas nas extremidades das laterais esquerda e direita.</figcaption>
+                                </figure>
+                                <h5>2 - Remoção das bolhas nas extremidades superiores e inferiores.</h5>
+                                <figure class="figure">
+                                    <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/image_bordas_horizontais.png">
+                                    <figcaption class="figure-caption">Imagem da remoção das bolhas nas extremidades superiores e inferiores.</figcaption>
+                                </figure>
+                                <h5>3 - Identificação do total de objetos.</h5>
+                                <figure class="figure">
+                                    <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/image_num_objetos.png">
+                                    <figcaption class="figure-caption">Imagem da identificação do total de objetos.
+                                    </figcaption>
+                                </figure>
+                                <h5>4 - Identificação do total de bolhas com furos.</h5>
+                                <figure class="figure">
+                                    <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/3.2/labeling.png">
+                                    <figcaption class="figure-caption">Imagem da identificação do total de bolhas com furos.
+                                    </figcaption>
+                                </figure>
                     </div>
                 </section>
                 <section>
                     <div class="section-title">
                         <h2>4. Manipulação de histogramas</h2>
-                        <h3>4.1 Equalização</h2>
+                        <h3>4.1 Equalização de histogramas</h2>
+                            <p><b>RESOLUÇÃO:</b> Capturamos o video em tons de cinza, fazemos uma copia e equalizamos a copia usando a função de equalização de histogramas, e posteriormente obtemos os histogramas da imagem original e da equalizada e mostramos
+                                a comparação.</p>
                             <pre>
                             <code class="cpp hljs">
 #include &lt;iostream&gt;
@@ -501,6 +510,8 @@ int main(int argc, char **argv)
                                 </figure>
                             </ol>
                             <h3>4.2 Detector de movimento</h2>
+                                <p><b>RESOLUÇÃO:</b> Capturamos o video em tons de cinza, calculamos o histograma do frame atual, pegamos um frame de comparação a cada 10 frames e comparamos os histogramas pela função de diferença de histogramas. Verificamos
+                                    se a diferença do frame atual e do frame de comparação é menor que 0.99, se for desenhamos na tela a mensagem que um movimento foi detectado. </p>
                                 <pre>
                                 <code class="cpp hljs">
 #include &lt;iostream&gt;
@@ -605,15 +616,15 @@ int main(int argc, char **argv)
                             </pre>
                                 <h3>Resultados</h3>
                                 <ol>
-                                    <li>Imagem sem movimento detectdado</li>
+                                    <li>Imagem sem movimento detectado</li>
                                     <figure class="figure">
                                         <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/4.2/q2/imagem_original.png">
-                                        <figcaption class="figure-caption">Imagem sem movimento detectdado.</figcaption>
+                                        <figcaption class="figure-caption">Imagem sem movimento detectado.</figcaption>
                                     </figure>
-                                    <li>Imagem com movimento detectdado</li>
+                                    <li>Imagem com movimento detectado</li>
                                     <figure class="figure">
                                         <img class="figure-img img-fluid rounded" src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/4.2/q2/imagem_movimento.png">
-                                        <figcaption class="figure-caption">Imagem com movimento detectdado.</figcaption>
+                                        <figcaption class="figure-caption">Imagem com movimento detectado.</figcaption>
                                     </figure>
                                 </ol>
                     </div>
@@ -621,6 +632,8 @@ int main(int argc, char **argv)
                 <section>
                     <div class="section-title">
                         <h2>5. Filtragem no domínio espacial I</h2>
+                        <p><b>RESOLUÇÃO:</b> Adicionamos mais uma opção no algoritmo de exemplo,e aplicamos condições de fluxo para identificar quando essa nova opção estivesse ativa aplica-se o filtro gaussiano na imagem e posteriormente aplica-se também
+                            o filtro laplaciano na mesma imagem. </p>
                         <pre>
                             <code class="cpp hljs">
 #include &lt;iostream&gt;
