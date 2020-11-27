@@ -802,8 +802,273 @@ int main(int, char **)
                 <section>
                     <div class="section-title">
                         <h2>6. Filtragem no domínio espacial II</h2>
-                        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis
-                            commodi quidem hic quas.</p>
+                        <h3>6.1.1 - Programa tiltshift</h3>
+                        <p><b>RESOLUÇÃO:</b> Foi adaptado o codigo de exemplo (<a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/addweighted.cpp">addweighted.cpp</a>), e a partir dele foi modificado a segunda imagem para ser a versão borrada
+                            da imagem inicial utilizando o filtro da media em 10 passadas, e para gerar o efeito de tiltshif pegamos a imagem borrada e introduzimos o retangulo formado pelos parametros de foco e posicao contendo a região da imagem inicial
+                            na imagem borrada, e quando fazemos a junção da imagem original com a imagem borrada adaptada criamos o efeito do tiltshif. </p>
+                        <pre>
+                            <code class="cpp hljs">
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+double alfa;
+int alfa_slider = 0;
+int alfa_slider_max = 100;
+
+int top_slider = 0;
+int top_slider_max = 100;
+
+int foco_slider = 0;
+int foco_slider_max = 100;
+
+cv::Mat image1, image2, frame32f, frameFiltered, imagem_borrada, blended,final;
+cv::Mat imageTop;
+
+char TrackbarName[50];
+
+void on_trackbar_blend(int, void *)
+{
+    alfa = (double)alfa_slider / alfa_slider_max;
+    cv::addWeighted(image1, 1 - alfa, final, alfa, 0.0, blended);
+    cv::imshow("tiltshift", blended);
+    cv::imwrite("tiltshift.png",blended);
+}
+
+void on_trackbar_line(int, void *)
+{
+    image1.copyTo(imageTop);
+    imagem_borrada.copyTo(final);
+    int width_img = image1.cols;
+    int height_img = image1.rows;
+    int posy = (foco_slider*height_img)/(100);
+    int limit = (top_slider * height_img)/100;
+    if((posy+limit) &gt; height_img){
+        posy =(height_img-limit);
+        limit=(height_img-posy);
+    }
+    if (limit &gt; 0)
+    {
+        cv::Mat tmp = image1(cv::Rect(0, posy, width_img, limit));
+        tmp.copyTo(final(cv::Rect(0, posy, width_img, limit)));
+    }
+    on_trackbar_blend(alfa_slider, 0);
+}
+
+int main(int argvc, char **argv)
+{
+    //mascara da media
+    float media[] = {1, 1, 1,
+                     1, 1, 1,
+                     1, 1, 1};
+    cv::Mat mask1, mask;
+    mask = cv::Mat(3, 3, CV_32F, media);
+    cv::scaleAdd(mask, 1 / 9.0, cv::Mat::zeros(3, 3, CV_32F), mask1);
+    cv::swap(mask, mask1);
+    //lendo a imagem
+    image1 = cv::imread("foto.png");
+    //copiando a imagem1 para a imagem2
+    image1.copyTo(image2);
+    //convertendo a imagem2 para float e salvando em frame32f
+    image2.convertTo(frame32f, CV_32F);
+    //Aplicando o filtro da media
+    for (int i = 0; i &lt; 10; i++)
+    {
+        cv::filter2D(frame32f, frameFiltered, frame32f.depth(), mask,
+                     cv::Point(1, 1), 0);
+        frame32f = frameFiltered;
+    }
+    frameFiltered.convertTo(imagem_borrada, CV_8U);
+    frameFiltered.convertTo(final, CV_8U);
+    image2.copyTo(imageTop);
+    
+    cv::namedWindow("tiltshift", 1);
+
+    std::sprintf(TrackbarName, "Alpha x %d", alfa_slider_max);
+    cv::createTrackbar(TrackbarName, "tiltshift",
+                       &alfa_slider,
+                       alfa_slider_max,
+                       on_trackbar_blend);
+    on_trackbar_blend(alfa_slider, 0);
+
+    std::sprintf(TrackbarName, "foco x %d", top_slider_max);
+    cv::createTrackbar(TrackbarName, "tiltshift",
+                       &top_slider,
+                       top_slider_max,
+                       on_trackbar_line);
+    std::sprintf(TrackbarName, "posicao x %d", foco_slider_max);
+    cv::createTrackbar(TrackbarName, "tiltshift",
+                       &foco_slider,
+                       foco_slider_max,
+                       on_trackbar_line);
+    on_trackbar_line(top_slider, 0);
+
+    cv::waitKey(0);
+    return 0;
+}
+                            </code>
+                        </pre>
+                        <h3>Resultados</h3>
+                        <ol>
+                            <li>Imagem de entrada</li>
+                            <figure><img src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/6.1/6.1.1/foto.png">
+                            </figure>
+                            <li>Imagem com o efeito tiltshift</li>
+                            <figure><img src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/6.1/6.1.1/tiltshift.png">
+                            </figure>
+                        </ol>
+                        <h3>6.1.2 - Programa tiltshiftvideo</h3>
+                        <p><b>RESOLUÇÃO:</b> A resolução é analoga ao codigo do tiltshif, foi modificado apenas a entrada que são os frames do video, e como saida o video com o efeito no formato avi.</p>
+                        <pre>
+                            <code class="cpp hljs">
+                                
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+double alfa;
+int alfa_slider = 100;
+int alfa_slider_max = 100;
+
+int top_slider = 53;
+int top_slider_max = 100;
+
+int foco_slider = 26;
+int foco_slider_max = 100;
+
+cv::Mat image1, image2, frame32f, frameFiltered, imagem_borrada, blended, final;
+cv::Mat imageTop;
+
+char TrackbarName[50];
+
+void on_trackbar_blend(int, void *)
+{
+    alfa = (double)alfa_slider / alfa_slider_max;
+    cv::addWeighted(image1, 1 - alfa, final, alfa, 0.0, blended);
+    cv::imshow("tiltshiftvideo", blended);
+}
+
+void on_trackbar_line(int, void *)
+{
+    image1.copyTo(imageTop);
+    imagem_borrada.copyTo(final);
+    int width_img = image1.cols;
+    int height_img = image1.rows;
+    int posy = (foco_slider * height_img) / (100);
+    int limit = (top_slider * height_img) / 100;
+    if ((posy + limit) &gt; height_img)
+    {
+        posy = (height_img - limit);
+        limit = (height_img - posy);
+    }
+    if (limit &gt; 0)
+    {
+        cv::Mat tmp = image1(cv::Rect(0, posy, width_img, limit));
+        tmp.copyTo(final(cv::Rect(0, posy, width_img, limit)));
+    }
+    on_trackbar_blend(alfa_slider, 0);
+}
+
+int main(int argvc, char **argv)
+{
+    int key;
+    int width, height;
+    cv::Mat mask1, mask;
+
+    //mascara da media
+    float media[] = {1, 1, 1,
+                     1, 1, 1,
+                     1, 1, 1};
+    mask = cv::Mat(3, 3, CV_32F, media);
+    cv::scaleAdd(mask, 1 / 9.0, cv::Mat::zeros(3, 3, CV_32F), mask1);
+    cv::swap(mask, mask1);
+    //lendo o video
+    cv::VideoCapture capture("video.mp4");
+    if (!capture.isOpened())
+        std::cout &lt;&lt; "Video nao encontrado";
+    //iniciando VideoWriter
+    cv::VideoWriter writer;
+    int codec = cv::VideoWriter::fourcc('M', 'J', 'P', 'G');
+    double fps = 15.0;
+    std::string filename = "./saida.avi";
+    width = capture.get(cv::CAP_PROP_FRAME_WIDTH);
+    height = capture.get(cv::CAP_PROP_FRAME_HEIGHT);
+    cv::Size frameSize(static_cast&lt;int&gt;(width), static_cast&lt;int&gt;(height));
+    writer.open(filename, codec, fps, frameSize, true);
+    // verificando se o arquivo foi criado
+    if (!writer.isOpened())
+    {
+        std::cout &lt;&lt; "O arquivo nao foi criado\n";
+        return -1;
+    }
+    //Criando tela
+    cv::namedWindow("tiltshiftvideo", 1);
+
+    while (1)
+    {
+        capture &gt;&gt; image1;
+        if (image1.empty())
+            break;
+        //copiando a imagem1 para a imagem2
+        image1.copyTo(image2);
+        //convertendo a imagem2 para float e salvando em frame32f
+        image2.convertTo(frame32f, CV_32F);
+        //Aplicando o filtro da media
+
+        for (int i = 0; i &lt; 10; i++)
+        {
+            cv::filter2D(frame32f, frameFiltered, frame32f.depth(), mask,
+                         cv::Point(1, 1), 0);
+            frame32f = frameFiltered;
+        }
+        frameFiltered.convertTo(imagem_borrada, CV_8U);
+        frameFiltered.convertTo(final, CV_8U);
+        image2.copyTo(imageTop);
+        std::sprintf(TrackbarName, "Alpha x %d", alfa_slider_max);
+        cv::createTrackbar(TrackbarName, "tiltshiftvideo",
+                           &alfa_slider,
+                           alfa_slider_max,
+                           on_trackbar_blend);
+        on_trackbar_blend(alfa_slider, 0);
+
+        std::sprintf(TrackbarName, "foco x %d", top_slider_max);
+        cv::createTrackbar(TrackbarName, "tiltshiftvideo",
+                           &top_slider,
+                           top_slider_max,
+                           on_trackbar_line);
+        std::sprintf(TrackbarName, "posicao x %d", foco_slider_max);
+        cv::createTrackbar(TrackbarName, "tiltshiftvideo",
+                           &foco_slider,
+                           foco_slider_max,
+                           on_trackbar_line);
+        on_trackbar_line(top_slider, 0);
+        writer.write(blended);
+        key = cv::waitKey(30);
+        if (key == 27)
+            break;
+    }
+    cv::waitKey(0);
+    return 0;
+}
+                            </code>
+                        </pre>
+                        <h3>Resultados</h3>
+                        <ol>
+                            <li>Video de entrada</li>
+                            <div align="center" class="embed-responsive embed-responsive-16by9">
+                                <video width="640" height="460" controls>
+                                <source src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/6.1/6.1.2/video.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                              </video>
+                            </div>
+                            <li class="mt-2">Video com o efeito tiltshift</li>
+                            <div align="center" class="embed-responsive embed-responsive-16by9">
+                                <video width="640" height="460" controls>
+                                <source src="../../codigos/DCA0445 - Processamento Digital de Imagens/Exercicios/6.1/6.1.2/saida.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                              </video>
+                            </div>
+                        </ol>
                     </div>
                 </section>
             </div>
