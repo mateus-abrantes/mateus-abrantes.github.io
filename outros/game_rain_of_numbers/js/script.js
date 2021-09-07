@@ -193,7 +193,7 @@ function draw() {
         textFont(fontLuckiestGuy, 40);
         fill(18, 82, 186);
         textAlign(LEFT, CENTER);
-        text("Ao sair da aula de matematica " + getNomePersonagem(op_avatar) +
+        text("Ao sair da aula de matemática " + getNomePersonagem(op_avatar) +
           " viu uma tremenda chuva. Só que não era uma chuva qualquer, as gotas caiam em forma de números." +
           " Para embarcar nessa aventura utilize as setas direcionais do teclado para movimentar o personagem."
           , width / 6, height / 6, 800);
